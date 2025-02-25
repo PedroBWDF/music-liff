@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="mb-5"></div>
+  <h3 class="title is-3">Edit My Profile
+  </h3>
+<form action="/users/{{user.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+  <div class="field">
+    <label class="label">Name</label>
+    <div class="control">
+      <input class="input" type="text" name="name" placeholder="Enter name" value="{{user.name}}" required>
+    </div>
+  </div>
+  <div class="form-row mb-3">
+    <label class="form-label" for="image">Image</label>
+    <input class="input" type="file" class="form-control-file" id="image" name="image">
+  </div>
+  <div class="field is-grouped">
+    <button class="button is-link" type="submit">Submit</button>
+    <div class="control">
+      <button class="button is-link is-light" type="button" onclick="window.history.back()">Back</button>
+    </div>
+  </div>
+</div>
+</form>
+</div>

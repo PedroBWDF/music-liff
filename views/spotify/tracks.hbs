@@ -1,0 +1,31 @@
+{{> navbar}}
+{{> messages}}
+<section class="section">
+  <div class="container">
+    <div class='tracks-container'>
+      <div class='tracks-title'>
+        <p class="title is-4">Tracks of {{album}}</p>
+        <p class="title is-6">Demo</p>
+      </div>
+      <br />
+      <ul>
+        {{#each tracks}}
+        <li class='tracks-layout'>
+          <p>{{this.name}}</p>
+          {{#if this.preview_url}}
+          <audio controls>
+            <source src="{{this.preview_url}}" type="audio/ogg">
+            Your browser does not support the audio element.
+          </audio>
+          {{else}}
+          <p>No audio available.</p>
+          {{/if}}
+        </li>
+        <br />
+        {{/each}}
+      </ul>
+    </div>
+    <hr>
+    <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+  </div>
+</section>

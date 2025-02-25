@@ -1,0 +1,36 @@
+{{> navbar}}
+{{> messages}}
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      {{#each albums}}
+      <div class="column is-one-quarter">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <a href="/spotify/tracks/{{this.id}}?album={{this.name}}&artist={{artist}}">
+                <img src="{{this.images.0.url}}" alt="Placeholder image" style="object-fit: cover;" />
+              </a>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <p>
+                {{this.name}}
+                {{!-- <br />
+                <span>
+                  {{this.album}}&nbsp;&nbsp;&nbsp;#{{this.releaseYear}}
+                </span> --}}
+              </p>
+              <button class='button-view-albums'><a href="/spotify/tracks/{{this.id}}?album={{this.name}}&artist={{artist}}" method="GET">View
+                  Tracks</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+      <hr>
+      <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+    </div>
+</section>

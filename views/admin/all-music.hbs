@@ -1,0 +1,89 @@
+{{> navbar}}
+{{> messages}}
+<section class="section">
+<div class="container">
+<h1 class="title is-3">音樂後台</h1>
+{{> admin-switch-table route='songs'}}
+<br>
+<a href='/admin/songs/create'>
+  <button class="button is-link">New Songs</button>
+</a>
+<br />
+<br />
+<table class="table">
+  <thead>
+    <tr>
+      <th><abbr title="Position">#</abbr></th>
+      <th>Name</th>
+      <th>Genre</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+  </thead>
+  <tbody>
+    {{#each songs}}
+    <tr>
+      <th>{{this.id}}</th>
+      <td>{{this.title}}</td>
+      <td>{{this.Genre.name}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+
+      <td><button type="button" class="btn btn-link">
+        <a class="btn btn-link link-primary" href="/admin/songs/{{this.id}}">
+          Show
+        </a>
+      </button></td>
+      <td><button type="button" class="btn btn-link">
+        <a class="btn btn-link link-primary" href="/admin/songs/{{this.id}}/edit">
+          Edit
+        </a>
+      </button></td>
+      <td><form action="/admin/songs/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+        <button type="submit" class="btn btn-delete" onclick="return confirm(`確定要刪除 {{ this.title }} 嗎？`)">Delete</button>
+      </form></td>
+
+      {{!-- <td><button class="button">
+          <a href="/admin/songs/{{this.id}}">
+            Show
+          </a>
+        </button></td>
+      <td><button class="button">
+          <a href="/admin/songs/{{this.id}}/edit">
+            Edit
+          </a>
+        </button></td>
+      <td>
+        <form action="/admin/songs/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+          <button class="button">Delete</button>
+        </form>
+      </td> --}}
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+</section>

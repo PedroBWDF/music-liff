@@ -1,0 +1,46 @@
+{{>navbar}}
+
+<section class="mt-6">
+  <div class="container">
+    <h2 class="title is-2">Latest Songs</h2>
+    <hr class="has-background-primary is-bold" style="width: 25%;"/>
+    <div class="columns is-multiline">
+      {{#each songs}}
+      <div class="column is-one-quarter">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <a href="/songs/{{this.id}}">
+                <img src="{{this.image}}" alt="Placeholder image" style="object-fit: cover;"/>
+              </a>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media-content">
+              <p class="title is-6">
+                <a href="/songs/{{this.id}}">
+                  {{this.title}}
+                </a>
+                <br />
+                <br />
+                <span class="tag is-danger is-light">
+                  {{this.Genre.name}}
+                </span>
+              <div class="content">
+                <p>
+                  {{this.artist}}
+                  <br />
+                  {{this.album}}&nbsp;&nbsp;&nbsp;#{{this.releaseYear}}
+                </p>
+                <p class="has-text-weight-bold has-text-danger">
+                  {{this.createdAt}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+{{>navbar}}
+
+<div class="section mt-1">
+  <div class="container">
+  <h2 class="title is-2">Latest Comments</h2>
+  <hr class="has-background-primary is-bold" style="width: 30%;" />
+<div class="card">
+  {{#each comments}}
+  {{!-- <header class="card-header">
+    <p class="card-header-title">{{this.Song.title}}</p>
+  </header> --}}
+  <div class="card-content">
+    <div class="content">
+      <p class="subtitle">
+        <a href="/songs/{{this.Song.id}}">{{this.Song.title}}</a>
+      </p>
+      {{this.text}}
+      <a href="/users/{{this.User.id}}">-by {{this.User.name}}</a>
+      <br />
+      <p class="has-text-weight-bold has-text-danger">
+        {{this.createdAt}}
+      </p>
+    </div>
+  </div>
+  <hr />
+  {{/each}}
+  </div>
+  </div>

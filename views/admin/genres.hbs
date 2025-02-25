@@ -1,0 +1,105 @@
+{{> navbar}}
+{{> messages}}
+<section class="section">
+  <div class="container">
+    <h1 class="title is-3">音樂後台</h1>
+    {{> admin-switch-table route='genres'}}
+    <br>
+      <div>
+      {{#if genre}}
+      <form class="columns" action="/admin/genres/{{genre.id}}?_method=PUT" method="POST">
+        <div class="column is-narrow">
+         <input class="input is-primary" type="text" placeholder="name" name="name" value="{{genre.name}}"
+          style="width: 315px;">
+        </div>
+        <div class="column is-narrow">
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-info" type="submit">Update</button>
+            </div>
+            <div class="control">
+              <a class="button is-ghost" href="/admin/genres">or Create New</a>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+      {{else}}
+      <form class="columns" action="/admin/genres" method="POST">
+        <div class="column is-narrow">
+          <input class="input is-primary" type="text" placeholder="Genre Name" name="name" style="width: 315px;">
+        </div>
+        <div class="column is-narrow">
+          <button class="button is-link" type="submit">Create</button>
+        </div>
+      </form>
+      {{/if}}
+    </div>
+
+    <br />
+    <br />
+    <table class="table">
+      <thead>
+        <tr>
+          <th><abbr title="Position">#</abbr></th>
+          <th>Genre Name</th>
+          <th>#</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+      </thead>
+      <tbody>
+        {{#each genres}}
+        <tr>
+          <th>{{this.id}}</th>
+          <td>{{this.name}}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+          <td><button type="button" class="btn btn-link">
+              <a class="btn btn-link link-primary" href="/admin/genres/{{this.id}}">
+                Edit
+              </a>
+            </button></td>
+          {{!-- <td><button type="button" class="btn btn-link">
+              <a class="btn btn-link link-primary" href="/admin/songs/{{this.id}}/edit">
+                Edit
+              </a>
+            </button></td> --}}
+          <td>
+            <form action="/admin/genres/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+            <input type="hidden" name="name" value="{{this.name}}">
+              <button type="submit" class="btn btn-delete"
+                onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>

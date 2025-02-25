@@ -1,0 +1,27 @@
+{{>navbar}}
+
+<section class="section">
+<div class="content">
+  <div>
+    <h1>{{song.title}}</h1>
+    <h4>{{song.Genre.name}}</h4>
+  </div>
+  <div class="col-md-4">
+    <img class="img-responsive center-block" src="{{song.image}}"
+      style="width: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
+    <br>
+    <div class="well">
+      <ul class="list-unstyled">
+        <li><strong>Artist:</strong> {{song.artist}}</li>
+        <li><strong>Album:</strong> {{song.album}}</li>
+        <li><strong>Release Year:</strong> {{song.releaseYear}}</li>
+      </ul>
+    </div>
+  </div>
+  {{!-- <div class="col-md-8">
+    <p style="white-space: break-spaces;">{{restaurant.description}}</p>
+  </div> --}}
+  <hr>
+</div>
+<a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+</section>

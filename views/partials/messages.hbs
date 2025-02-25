@@ -1,0 +1,15 @@
+{{#if error_messages}}
+<article class="message is-danger">
+  <div class="message-body">
+    <strong>{{error_messages}}</strong>
+  </div>
+</article>
+{{/if}}
+
+{{#if success_messages}}
+<article class="message is-info">
+  <div class="message-body">
+    <strong>{{success_messages}}</strong>
+  </div>
+</article>
+{{/if}}

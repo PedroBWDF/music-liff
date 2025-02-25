@@ -1,0 +1,31 @@
+{{!-- <div class="tabs">
+  <ul>
+    <li class="is-active"><a>Pictures</a></li>
+    <li><a>Music</a></li>
+    <li><a>Videos</a></li>
+    <li><a>Documents</a></li>
+  </ul>
+</div> --}}
+
+<div class="tabs is-boxed">
+  <ul>
+    <li class="{{#ifCond route 'songs'}}is-active{{/ifCond}}">
+      <a href="/admin/songs">
+        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+        <span>Songs</span>
+      </a>
+    </li>
+    <li class="{{#ifCond route 'users'}}is-active{{/ifCond}}">
+      <a href="/admin/users">
+        <span class="icon is-small"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
+        <span>Users</span>
+      </a>
+    </li>
+    <li class="{{#ifCond route 'genres'}}is-active{{/ifCond}}">
+      <a href="/admin/genres" {{#ifCond route 'genres'}}active{{/ifCond}}>
+        <span class="icon is-small"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+        <span>Genres</span>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,90 @@
+{{> navbar}}
+    {{> messages}}
+    <section class="section">
+      <div class="container">
+        {{!-- genre tabs --}}
+        <div class="tabs is-medium">
+          <ul>
+            <li class="{{#ifCond '' genreId}}is-active{{/ifCond}}">
+              <a href="?genreId=">All
+              </a>
+            </li>
+            {{#each genres}}
+            <li class="{{#ifCond this.id ../genreId}}is-active{{/ifCond}}">
+              <a href="?genreId={{this.id}}">{{this.name}}</a>
+            </li>
+            {{/each}}
+            </ul>
+          </div>
+        {{!-- songs --}}
+        <div class="columns is-multiline">
+        {{#each songs}}
+        <div class="column is-one-quarter">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <a href="/songs/{{this.id}}">
+              <img src="{{this.image}}" alt="Placeholder image" style="object-fit: cover;"/>
+              </a>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media-content">
+              <p class="title is-6">
+                <a href="/songs/{{this.id}}">
+                  {{this.title}}
+                </a>
+                <br />
+                <br />
+                  <span class="tag is-danger is-light">
+                    {{this.Genre.name}}
+                  </span>
+              <div class="content">
+                <p>
+                  {{this.artist}}
+                  <br />
+                  <span>
+                  {{this.album}}&nbsp;&nbsp;&nbsp;#{{this.releaseYear}}
+                  </span>
+                </p>
+                {{#if isLiked}}
+                <form action="/like/{{this.id}}?_method=DELETE" method="POST">
+                  <button class="button">
+                    <span class="icon is-small" style="color:gold;">
+                      <i class="fa-solid fa-star"></i>
+                    </span>
+                  </button>
+                </form>
+                {{else}}
+                <form action="/like/{{this.id}}" method="POST">
+                  <button class="button">
+                    <span class="icon is-small">
+                      <i class="fa-regular fa-star"></i>
+                    </span>
+                  </button>
+                </form>
+                {{/if}}
+              </div>
+
+            </div>
+          </div>
+        </div>
+        </div>
+        {{/each}}
+        </div>
+        {{!-- pagination --}}
+        <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+          <a href="/music?page={{pagination.prev}}&genreId={{genreId}}" class="pagination-previous">Previous</a>
+          <a href="/music?page={{pagination.next}}&genreId={{genreId}}" class="pagination-next">Next page</a>
+          <ul class="pagination-list">
+            {{#each pagination.pages}}
+              {{#ifCond this ../pagination.currentPage}}
+              <li><a href="#" class="pagination-link is-current" aria-label="Goto page">{{this}}</a></li>
+              {{else}}
+              <li><a href="/music?page={{this}}&genreId={{../genreId}}" class="pagination-link" aria-label="Goto page">{{this}}</a></li>
+            {{/ifCond}}
+            {{/each}}
+          </ul>
+        </nav>
+      </div>
+    </section>

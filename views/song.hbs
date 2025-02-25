@@ -1,0 +1,83 @@
+{{>navbar}}
+{{> messages}}
+<section class="section">
+  <div class="content">
+    <div>
+      <h1>{{song.title}}</h1>
+      <h6 class="tag is-danger is-light">{{song.Genre.name}}</h6>
+    </div>
+    <div class="col-md-4">
+      <img class="img-responsive center-block" src="{{song.image}}"
+        style="width: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
+      <br>
+      <div class="well">
+        <ul class="list-unstyled">
+          <li><strong>Artist:</strong> {{song.artist}}</li>
+          <li><strong>Album:</strong> {{song.album}}</li>
+          <li><strong>Release Year:</strong> {{song.releaseYear}}</li>
+        </ul>
+        {{#if isLiked}}
+        <form action="/like/{{song.id}}?_method=DELETE" method="POST">
+          <button class="button">
+            <span class="icon is-small" style="color:gold;">
+              <i class="fa-solid fa-star"></i>
+            </span>
+          </button>
+        </form>
+        {{else}}
+        <form action="/like/{{song.id}}" method="POST">
+          <button class="button">
+            <span class="icon is-small">
+              <i class="fa-regular fa-star"></i>
+            </span>
+          </button>
+        </form>
+        {{/if}}
+      </div>
+    </div>
+    {{!-- <div class="col-md-8">
+      <p style="white-space: break-spaces;">{{restaurant.description}}</p>
+    </div> --}}
+    <hr>
+  </div>
+  {{!-- <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a> --}}
+  
+  {{!-- comment area --}}
+  <h4 class="title is-4">所有留言：</h4>
+  {{#each song.Comments}}
+    <div class="block">
+      {{#if ../user.isAdmin}}
+      <form action="/comments/{{this.id}}?_method=DELETE" method="POST" class="delete-button-form">
+        <button type="submit" class="button is-danger is-outlined" onclick="return confirm(`確定要刪除 {{ ../song.title }} 的這則留言嗎？`)">
+          <span>Delete</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </form>
+      {{/if}}
+      <h5 class="title is-5"><a href="/users/{{this.User.id}}">{{this.User.name}}</a></h5>
+      <p>{{this.text}}</p>
+      <footer class="blockquote-footer">{{this.createdAt}}</footer>
+    </div>
+    <hr />
+  {{/each}}
+
+  <form action="/comments" method="POST">
+  <div class="field">
+    <label class="label">Leave your comments</label>
+    <div class="control">
+      <textarea class="textarea" name="text" placeholder="Textarea"></textarea>
+    </div>
+  </div>
+  <div class="field is-grouped">
+    <div class="control">
+      <input type="hidden" name="songId" value="{{song.id}}" />
+      <button class="button is-link">Submit</button>
+    </div>
+    <div class="control">
+        <button class="button is-link is-light" type="button" onclick="window.history.back()">Back</button>
+    </div>
+  </div>
+  </form>
+</section>

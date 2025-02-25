@@ -1,0 +1,69 @@
+{{> navbar}}
+{{> messages}}
+<section class="section">
+  <div class="container">
+    <h1 class="title is-3">音樂後台</h1>
+    {{> admin-switch-table route='users'}}
+    <br>
+<table class="table">
+  <thead>
+    <tr>
+      <th><abbr title="Position">#</abbr></th>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+      <th>Role</th>
+      <th></th>
+      <th></th>
+      <th>#</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+  </thead>
+  <tbody>
+    {{#each users}}
+    <tr>
+      <th>{{this.id}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.email}}</td>
+      <td></td>
+      <td>{{#if this.isAdmin}}admin{{else}}user{{/if}}</td>
+      <td></td>
+      <td></td>
+      <td>{{#if this.isAdmin}}
+      <form action="/admin/users/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
+        <button type="submit" class="btn btn-link btn-admin" onclick="return confirm(`確定要調整{{ this.name }}的權限嗎？`)">set as user
+        </button>
+      </form>
+      {{else}}
+      <form action="/admin/users/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
+        <button type="submit" class="btn btn-link btn-user" onclick="return confirm(`確定要調整{{ this.name }}的權限嗎？`)">set as admin
+        </button>
+      </form>
+      {{/if}}</td>
+      <td></td>
+      <td></td>
+      </td>
+
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+</section>
