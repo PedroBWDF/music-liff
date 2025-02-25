@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Music-forum Project
 
 **A Spotify-integrated & server-side rendered web application**
@@ -97,3 +98,6 @@ accounts for easy testing:
 #### Authorization & Error Messages
 ![Demo_4](https://github.com/user-attachments/assets/dbd6f83e-f042-4bba-ab05-9d9c5a7df458)
 
+=======
+# music-liff
+>>>>>>> e6a4808917aad846555fea32a1f00c3894e2b5a7
