@@ -1,11 +1,17 @@
 {
-    "rewrites": [
+    "version": 2,
+    "builds": [
       {
-        "source": "/(.*)",
-        "destination": "/"
+        "src": "app.js",
+        "use": "@vercel/node"
       }
     ],
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist"
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "app.js"
+      }
+    ]
   }
+  
   
