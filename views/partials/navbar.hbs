@@ -92,3 +92,23 @@
     </div>
   </div>
 </nav>
+<!-- 在 navbar.hbs 底部加入 -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 獲取所有 navbar-burger 元素
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // 為每個 burger 添加點擊事件
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+        // 獲取目標 menu 的 ID
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // 切換 burger 和 menu 的 is-active 類別
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });
+</script>

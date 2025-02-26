@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music LIFF</title>
+</head>
+<body>
+  <h1>Music LIFF</h1>
+  <p>Access Token: <span id="token"></span></p>
+  <p>LINE UUID: <span id="uuid"></span></p>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    liff
+      .init({ 
+        // LINE developer LIFF detail可以找到LIFF ID資訊
+        liffId: '2006961935-RxM0xqae'
+      })
+      .then(() => {
+        if (!liff.isLoggedIn()) {
+          // 若使用external browser，需要用此方法讓用戶登入
+          liff.login()
+        } else {
+          const token = liff.getAccessToken()
+          document.getElementById('token').textContent = token
+          fetch('/api/liff/uuid', { headers: { Authorization: `Bearer ${token}` } })
+            .then(res => res.json())
+            .then(data => {
+              document.getElementById('uuid').textContent = data.line_uuid
+            })
+            .catch(err => console.log('Fetch UUID failed:', err))
+          console.log('Access Token:', token)
+        }
+      })
+      .catch((err) => {
+        console.log('LIFF 初始化失敗:', err.code, err.message)
+      })
+  </script>
+</body>
+</html>

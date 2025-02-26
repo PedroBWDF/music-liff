@@ -3,6 +3,7 @@ const router = express.Router()
 const passport = require('../config/passport')
 // const jwt = require('jsonwebtoken')
 const oauth = require('./oauth')
+const liff = require('./api/liff')
 
 const musicController = require('../controllers/music-controller')
 const userController = require('../controllers/user-controller')
@@ -46,6 +47,7 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
 router.get('/logout', userController.logout)
 
 router.use('/oauth', oauth)
+router.use('/api/liff', liff)
 router.use('/', generalErrorHandler)
 
 // router.use為路由加上middleware。若上面路由都未符合，就redirect到/music
