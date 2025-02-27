@@ -21,12 +21,15 @@
         } else {
           const token = liff.getAccessToken()
           document.getElementById('token').textContent = token
-          fetch('/api/liff/uuid', { headers: { Authorization: `Bearer ${token}` } })
+          fetch('/api/liff/uuid', { headers: { Authorization: `Bearer ${token}`, 'ngrok-skip-browser-warning': 'true' } })
             .then(res => res.json())
             .then(data => {
               document.getElementById('uuid').textContent = data.line_uuid
             })
-            .catch(err => console.log('Fetch UUID failed:', err))
+            .catch(err => {
+              console.error('Fetch UUID failed:', err)
+              document.getElementById('uuid').textContent = 'Error: ' + err.message
+            })
           console.log('Access Token:', token)
         }
       })
