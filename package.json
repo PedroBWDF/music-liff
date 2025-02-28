@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "start:prod": "npx sequelize-cli db:migrate --env production && node app.js",
     "dev": "nodemon app.js",
     "lint": "eslint \"**/*.js\" --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
