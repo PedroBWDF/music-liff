@@ -7,6 +7,7 @@
   <h1>Music LIFF</h1>
   <p>Access Token: <span id="token"></span></p>
   <p>LINE UUID: <span id="uuid"></span></p>
+  <p>LINE Display Name: <span id="display-name"></span></p>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     liff
@@ -21,10 +22,12 @@
         } else {
           const token = liff.getAccessToken()
           document.getElementById('token').textContent = token
-          fetch('/api/liff/uuid', { headers: { Authorization: `Bearer ${token}`, 'ngrok-skip-browser-warning': 'true' } })
+          fetch('/api/liff/uuid', { headers: { Authorization: `Bearer ${token}`, 'ngrok-skip-browser-warning': 'true' } ,
+          credentials: 'include'})
             .then(res => res.json())
             .then(data => {
               document.getElementById('uuid').textContent = data.line_uuid
+              document.getElementById('display-name').textContent = data.line_display_name
             })
             .catch(err => {
               console.error('Fetch UUID failed:', err)
