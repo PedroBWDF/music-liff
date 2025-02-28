@@ -26,7 +26,7 @@ module.exports = {
     username: 'root',  // 替換成 Render 提供的 MySQL 用戶名
     password: 'password',  // 替換成 Render 提供的 MySQL 密碼
     database: 'music_liff_db',  // 替換成你的 Render MySQL 資料庫名稱
-    host: '100.20.92.101',  // 使用 Render 提供的其中一個 IP
+    host: 'mysql-e8vy',  // 使用 Render 提供的其中一個 IP
     port: 3306,  // MySQL 預設 Port
     dialect: 'mysql'
   }
