@@ -64,6 +64,21 @@ app.use((req, res, next) => {
 })
 app.use(routes)
 
+const { execSync } = require('child_process') // 引入 child_process 用於執行命令
+const env = process.env.NODE_ENV || 'development' // 獲取當前環境
+
+// 在連線測試和應用啟動前執行遷移
+if (env === 'production') {
+  console.log('Running migrations...')
+  try {
+    execSync('npx sequelize-cli db:migrate --env production', { stdio: 'inherit' })
+    console.log('Migrations complete')
+  } catch (err) {
+    console.error('Migration error:', err)
+    process.exit(1) // 如果遷移失敗，終止應用
+  }
+}
+
 db.sequelize.authenticate()
   .then(() => {
     console.log('Database connection has been established successfully.')
