@@ -8,6 +8,7 @@ const cors = require('cors')
 // const port = process.env.NODE_DOCKER_PORT || 3000
 const routes = require('./routes')
 
+app.use(express.json())
 app.use(cors({
   origin: ['https://liff.line.me', 'http://localhost:3000'], // 允許 LINE LIFF 和本地測試
   methods: ['GET', 'POST'],

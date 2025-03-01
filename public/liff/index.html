@@ -1,13 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Music LIFF</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+    #token {
+    word-break: break-all; 
+    max-width: 100%;
+  }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://kit.fontawesome.com/09e2a14f8b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>Music LIFF</h1>
-  <p>Access Token: <span id="token"></span></p>
-  <p>LINE UUID: <span id="uuid"></span></p>
-  <p>LINE Display Name: <span id="display-name"></span></p>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">Music LIFF</h1>
+      
+      <div class="box">
+        <div class="field">
+          <label class="label">Access Token</label>
+          <div class="control">
+            <p class="content" id="token"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">LINE UUID</label>
+          <div class="control">
+            <p class="content" id="uuid"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">LINE Display Name</label>
+          <div class="control">
+            <p class="content" id="display-name"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="edit-name">Edit Display Name</label>
+          <div class="control has-icons-left">
+            <input class="input" type="text" id="edit-name" placeholder="Enter new display name">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary" onclick="updateDisplayName()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     liff
@@ -20,9 +73,15 @@
           // 若使用external browser，需要用此方法讓用戶登入
           liff.login()
         } else {
-          const token = liff.getAccessToken()
-          document.getElementById('token').textContent = token
-          fetch('/api/liff/uuid', { headers: { Authorization: `Bearer ${token}`, 'ngrok-skip-browser-warning': 'true' } ,
+          const lineToken = liff.getAccessToken()
+          console.log('line token:', lineToken)
+          document.getElementById('token').textContent = lineToken
+
+          fetch('/api/liff/uuid', { 
+          headers: { 
+          'X-Line-Token': lineToken, // 自訂
+          'ngrok-skip-browser-warning': 'true' 
+        },
           credentials: 'include'})
             .then(res => res.json())
             .then(data => {
@@ -33,12 +92,47 @@
               console.error('Fetch UUID failed:', err)
               document.getElementById('uuid').textContent = 'Error: ' + err.message
             })
-          console.log('Access Token:', token)
+          console.log('Access Token:', lineToken)
         }
       })
       .catch((err) => {
         console.log('LIFF 初始化失敗:', err.code, err.message)
       })
+
+    function updateDisplayName() {
+    const newDisplayName = document.getElementById('edit-name').value.trim()
+    const lineToken = liff.getAccessToken()
+    const lineUuid = document.getElementById('uuid').textContent
+
+    if (!newDisplayName) {
+      alert('請輸入新的顯示名稱！')
+      return
+    }
+
+    fetch('/api/liff/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Line-Token': lineToken, // 自訂header
+        'ngrok-skip-browser-warning': 'true'
+      },
+      body: JSON.stringify({ lineUuid, lineDisplayName: newDisplayName }) // 新增 lineUuid
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        document.getElementById('display-name').textContent = newDisplayName
+        document.getElementById('edit-name').value = ''
+        alert('顯示名稱更新成功！')
+      } else {
+        alert('更新失敗: ' + data.error)
+      }
+    })
+    .catch(err => {
+      console.error('Update failed:', err)
+      alert('更新失敗，請稍後再試！')
+    })
+  }
   </script>
 </body>
 </html>
