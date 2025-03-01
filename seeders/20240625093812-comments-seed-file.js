@@ -5,14 +5,14 @@ const { faker } = require('@faker-js/faker')
 module.exports = {
   async up (queryInterface, Sequelize) {
     const users = await queryInterface.sequelize.query( // 用sequelize查詢取出所有user
-      'SELECT id FROM Users;',
+      'SELECT id FROM users;',
       { type: queryInterface.sequelize.QueryTypes.SELECT }
     )
     const songs = await queryInterface.sequelize.query(
-      'SELECT id FROM Songs;',
+      'SELECT id FROM songs;',
       { type: queryInterface.sequelize.QueryTypes.SELECT }
     )
-    await queryInterface.bulkInsert('Comments',
+    await queryInterface.bulkInsert('comments',
       Array.from({ length: 111 }, () => ({
         text: faker.lorem.sentence(),
         user_id: users[Math.floor(Math.random() * users.length)].id,
@@ -29,6 +29,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Comments', null, {})
+    await queryInterface.bulkDelete('comments', null, {})
   }
 }

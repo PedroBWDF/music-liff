@@ -17,7 +17,7 @@ module.exports = {
       'SELECT id FROM Genres;',
       { type: queryInterface.sequelize.QueryTypes.SELECT }
     )
-    await queryInterface.bulkInsert('Songs',
+    await queryInterface.bulkInsert('songs',
       Array.from({ length: 50 }, () => ({
         title: faker.music.songName(),
         artist: faker.person.fullName(),
@@ -38,6 +38,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Songs', {})
+    await queryInterface.bulkDelete('songs', {})
   }
 }

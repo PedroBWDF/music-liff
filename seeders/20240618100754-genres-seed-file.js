@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Genres',
+    await queryInterface.bulkInsert('genres',
       ['Rock', 'Pop', 'Hip-Hop', 'R&B', 'Jazz', 'EDM', 'Alternative', 'Others']
         .map(item => {
           return {
@@ -31,6 +31,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Genres', {})
+    await queryInterface.bulkDelete('genres', {})
   }
 }
