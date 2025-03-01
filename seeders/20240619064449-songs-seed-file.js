@@ -14,7 +14,7 @@ module.exports = {
      * }], {});
     */
     const genres = await queryInterface.sequelize.query(
-      'SELECT id FROM Genres;',
+      'SELECT id FROM genres;',
       { type: queryInterface.sequelize.QueryTypes.SELECT }
     )
     await queryInterface.bulkInsert('songs',
