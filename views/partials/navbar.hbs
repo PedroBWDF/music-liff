@@ -1,10 +1,9 @@
 <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item-1" href="/">
-      Music
+    <a class="navbar-item" href="/">
+      <strong class="title is-4">Music</strong>
     </a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -13,52 +12,16 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="/">
-        Home
-      </a>
-
-      <a class="navbar-item" href="/spotify">
-        Spotify
-      </a>
-
+      <a class="navbar-item" href="/">Home</a>
+      <a class="navbar-item" href="/spotify">Spotify</a>
+      
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Latest
-        </a>
+        <a class="navbar-link">Latest</a>
         <div class="navbar-dropdown">
-          <br />
-          <a class="navbar-item" href="/songs/latest">
-            Latest songs
-          </a>
-          <br />
-          <a class="navbar-item" href="/comments/latest">
-            Latest comments
-          </a>
+          <a class="navbar-item" href="/songs/latest">Latest Songs</a>
+          <a class="navbar-item" href="/comments/latest">Latest Comments</a>
         </div>
       </div>
-
-      {{!-- <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            About
-          </a>
-          <a class="navbar-item is-selected">
-            Jobs
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
-        </div>
-      </div> --}}
     </div>
 
     <div class="navbar-end">
@@ -66,49 +29,77 @@
         <div class="buttons">
           {{#if user}}
           {{#if user.isAdmin}}
-          <a href=/admin class="button is-primary">
-            <strong>Adimin 後台</strong>
-          </a>
-          {{/if}}
-          <a href="" class="button is-primary" onclick="event.preventDefault()">
-            <strong>Hi, {{user.email}}</strong>
-          </a>
-          <a href="/users/{{user.id}}" class="button is-rounded is-outlined">
-            <strong>My profile</strong>
-          </a>
-          <a href=/logout class="button is-light">
-            Log out
-          </a>
+            <a href="/admin" class="button is-primary is-small">Admin 後台</a>
+           {{/if}}
+            <a href="#" class="button is-primary is-small" onclick="event.preventDefault()">
+               Hi, {{#if user.lineDisplayName}}{{user.lineDisplayName}}{{else}}{{user.name}}{{/if}}
+           </a>
+            <a href="/users/{{user.id}}" class="button is-outlined is-small">My Profile</a>
+            <a href="/logout" class="button is-light is-small">Log out</a>
           {{else}}
-          <a href=/signup class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a href=/login class="button is-light">
-            Log in
-          </a>
+            <a href="/signup" class="button is-primary">Sign up</a>
+            <a href="/login" class="button is-light">Log in</a>
           {{/if}}
         </div>
       </div>
     </div>
   </div>
 </nav>
-<!-- 在 navbar.hbs 底部加入 -->
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // 獲取所有 navbar-burger 元素
+    // 處理 navbar-burger
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-    // 為每個 burger 添加點擊事件
     $navbarBurgers.forEach(el => {
       el.addEventListener('click', () => {
-        // 獲取目標 menu 的 ID
         const target = el.dataset.target;
         const $target = document.getElementById(target);
-
-        // 切換 burger 和 menu 的 is-active 類別
         el.classList.toggle('is-active');
         $target.classList.toggle('is-active');
       });
     });
+
+    // 處理手機端的 navbar-dropdown
+    const $navbarLinks = Array.prototype.slice.call(document.querySelectorAll('.navbar-link'), 0);
+    $navbarLinks.forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (window.innerWidth <= 1023) { // Bulma 的手機斷點
+          e.preventDefault(); // 防止點擊時跳轉
+          const dropdown = el.nextElementSibling; // 獲取旁邊的 navbar-dropdown
+          const isActive = dropdown.classList.contains('is-active');
+          
+          // 如果當前下拉選單未展開，則展開；若已展開，則收合
+          if (!isActive) {
+            dropdown.classList.add('is-active');
+          } else {
+            dropdown.classList.remove('is-active');
+          }
+        }
+      });
+    });
+
+    // 點擊下拉選單中的項目時收合 navbar-menu
+    const $dropdownItems = Array.prototype.slice.call(document.querySelectorAll('.navbar-dropdown .navbar-item'), 0);
+    $dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 1023) {
+          const menu = document.getElementById('navbarBasicExample');
+          const burger = document.querySelector('.navbar-burger');
+          menu.classList.remove('is-active');
+          burger.classList.remove('is-active');
+        }
+      });
+    });
   });
 </script>
+
+<style>
+  @media screen and (max-width: 1023px) {
+    .navbar-dropdown {
+      display: none; /* 預設隱藏 */
+    }
+    .navbar-dropdown.is-active {
+      display: block; /* 點擊時顯示 */
+    }
+  }
+</style>

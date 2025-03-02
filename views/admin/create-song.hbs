@@ -1,59 +1,66 @@
-<div class="container">
-  <div class="mb-5"></div>
-  <h3 class="title is-3">Create Song
-  </h3>
-<form action="/admin/songs" method="POST" enctype="multipart/form-data">
-  <div class="field">
-    <label class="label">Title</label>
-    <div class="control">
-      <input class="input" type="text" name="title" placeholder="Enter title" required>
-    </div>
+{{> navbar}}
+{{> messages}}
+<section class="section">
+  <div class="container">
+    <h3 class="title is-3">Create Song</h3>
+
+    <form action="/admin/songs" method="POST" enctype="multipart/form-data">
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <input class="input" type="text" name="title" placeholder="Enter title" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="genreId">Genre</label>
+        <div class="control">
+          <div class="select is-fullwidth">
+            <select id="genreId" name="genreId">
+              {{#each genres}}
+              <option value="{{this.id}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Artist</label>
+        <div class="control">
+          <input class="input" type="text" name="artist" placeholder="Enter artist">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Album</label>
+        <div class="control">
+          <input class="input" type="text" name="album" placeholder="Enter album">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Release Year</label>
+        <div class="control">
+          <input class="input" type="text" name="releaseYear" placeholder="Enter release year">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="image">Image</label>
+        <div class="control">
+          <input class="input" type="file" id="image" name="image">
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link" type="submit">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button is-link is-light" type="button" onclick="window.history.back()">Back</button>
+        </div>
+      </div>
+    </form>
   </div>
-
-  <div class="field">
-    <label class="label" for="genreId">Genre</label>
-    <div class="select is-fullwidth is-multiple">
-    <select class="input" id="genreId" name="genreId">
-      {{#each genres}}
-      <option value="{{this.id}}">{{this.name}}</option>
-      {{/each}}
-    </select>
-    </div>
-  </div>
-
-  <div class="field">
-    <label class="label">Artist</label>
-    <div class="control">
-      <input class="input" type="text" name="artist" placeholder="Enter artist">
-    </div>
-  </div>
-
-  <div class="field">
-    <label class="label">Album</label>
-    <div class="control">
-      <input class="input" type="text" name="album" placeholder="Enter album">
-    </div>
-  </div>
-
-  <div class="field">
-    <label class="label">Release Year</label>
-    <div class="control">
-      <input class="input" type="text" name="releaseYear" placeholder="Enter release year">
-    </div>
-  </div>
-
-<div class="field">
-  <label class="label" for="image">Image</label>
-  <input class="input" type="file" class="form-control-file" id="image" name="image">
-</div>
-
-<div class="field is-grouped">
-<button class="button is-link" type="submit">Submit</button>
-<div class="control">
-  <button class="button is-link is-light" type="button" onclick="window.history.back()">Back</button>
-</div>
-</div>
-</form>
-{{!-- <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a> --}}
-<div class="mt-5"></div>
-</div>
+</section>

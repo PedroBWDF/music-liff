@@ -1,38 +1,52 @@
 {{>navbar}}
 <div class="card">
-  <div class="card-content" style="margin-left: 80px;">
+  <div class="card-content">
     <div class="media">
       <div class="media-left">
-        <figure class="image is-128x128" style="margin-right: 100px;">
-          <img class="is-rounded" src="{{profileUser.image}}" alt="Placeholder image" style="width: 100%; height: 100%; object-fit: cover;" />
+        <figure class="image is-96x96">
+          <img class="is-rounded" src="{{profileUser.image}}" alt="Placeholder image" style="object-fit: cover;" />
         </figure>
       </div>
       <div class="media-content">
-        <p class="title is-4" style="margin-bottom: 20px;">{{profileUser.name}}</p>
-        <p class="subtitle is-6">{{profileUser.email}}</p>
-        <p><a href="/users/{{profileUser.id}}/edit" class="btn btn-primary">Edit My Profile</a></p>
-          {{!-- <i class="fa-solid fa-medal custom-font"></i> --}}
-          <p class="subtitle is-6 custom-font" style="margin-top: 30px; margin-bottom: 10px;">評論了{{commentData.length}}首歌曲</p>
-          {{!-- <i class="fa-solid fa-medal"></i> --}}
-          <button class="button is-link is-outlined">
-          <a href="/users/{{profileUser.id}}/likedsongs" class="btn btn-primary">My Favorite Songs</a>
-          </button>
+        <p class="title is-3 mb-3">{{profileUser.name}}</p>
+        <p class="subtitle is-5 mb-3">{{profileUser.email}}</p>
+        <div class="buttons">
+          <a href="/users/{{profileUser.id}}/edit" class="button is-primary">Edit My Profile</a>
+          <a href="/users/{{profileUser.id}}/likedsongs" class="button is-link is-outlined">My Favorite Songs</a>
+        </div>
+        <p class="subtitle is-5 custom-font mt-3">評論了{{commentData.length}}首歌曲</p>
       </div>
     </div>
   </div>
 
   <div class="card-content">
-    <div>
-      <h6 class="custom-font">已評論過的歌曲：</h6>
-    </div>
-    <br />
-    <div class="comment-images">
+    <h6 class="custom-font title is-5 mb-3">已評論過的歌曲：</h6>
+    <div class="columns is-mobile is-multiline">
       {{#each commentData}}
-      <a href="/songs/{{this.Song.id}}">
-        <img src="{{this.Song.image}}" class="img-thumbnail ms-1" style="max-width: 100px; max-height: 100px;"
-          alt="{{this.Song.title}}">
-      </a>
+      <div class="column is-4-mobile is-3-tablet is-2-desktop">
+        <a href="/songs/{{this.Song.id}}">
+          <img src="{{this.Song.image}}" class="img-thumbnail" style="width: 100%; max-width: 120px; height: auto; object-fit: cover;" alt="{{this.Song.title}}">
+        </a>
+      </div>
       {{/each}}
     </div>
   </div>
 </div>
+
+<style>
+  @media screen and (max-width: 768px) {
+    .card-content {
+      padding: 1rem; /* 減少手機端的內邊距 */
+    }
+    .buttons .button {
+      padding: 0.5rem 1rem; /* 調整按鈕內邊距 */
+      font-size: 0.875rem; /* 縮小按鈕字體 */
+    }
+    .title.is-3 {
+      font-size: 1.5rem; /* 縮小標題字體 */
+    }
+    .subtitle.is-5, .title.is-5 {
+      font-size: 1rem; /* 縮小副標題和"已評論過的歌曲"字體 */
+    }
+  }
+</style>

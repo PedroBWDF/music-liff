@@ -1,54 +1,44 @@
-<div class="container">
-  {{> messages}}
-    <div class="mb-5"></div>
-  <h3 class="title is-3">Log In</h3>
-<form class="form-signin" action="/login" method="POST">
-  {{!-- <div class="field">
-    <label class="label">Email</label>
-    <div class="control">
-      <input class="input" type="text" name="email" placeholder="Email">
+<section class="section">
+  <div class="container">
+    {{> messages}}
+    <h3 class="title is-3">Log In</h3>
+
+    <form class="form-signin" action="/login" method="POST">
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="email" name="email" placeholder="Email" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="password" name="password" placeholder="Password" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link">Log In</button>
+        </div>
+        <div class="control">
+          <a href="/signup" class="button is-ghost">Sign Up</a>
+        </div>
+      </div>
+    </form>
+
+    <div class="mt-4">
+      <form action="/oauth/google" method="GET">
+        <button class="button is-light" type="submit">Log in with Google</button>
+      </form>
     </div>
-  </div> --}}
-
-  <div class="field">
-    <p class="control has-icons-left has-icons-right">
-      <input class="input" type="email" name="email" placeholder="Email" />
-      <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
-      </span>
-    </p>
   </div>
-
-<div class="field">
-  <p class="control has-icons-left">
-    <input class="input" type="password" name="password" placeholder="Password" />
-    <span class="icon is-small is-left">
-      <i class="fas fa-lock"></i>
-    </span>
-  </p>
-</div>
-
-  {{!-- <div class="field">
-    <label class="label">Password</label>
-    <div class="control">
-      <input class="input" type="password" name="password" placeholder="Password">
-    </div>
-  </div> --}}
-
-<div class="field is-grouped">
-  <div class="control">
-    <button class="button is-link">Log In</button>
-  </div>
-  <div class="control">
-    <button class="button is-ghost"><a href="/signup">Sign Up</a></button>
-  </div>
-</div>
-</form>
-<br />
-<form action="/oauth/google" method="GET">
-  <button class="button is-light" type="submit">Log in with Google</button>
-</form>
-</div>
+</section>

@@ -4,66 +4,30 @@
   <div class="container">
     <h1 class="title is-3">音樂後台</h1>
     {{> admin-switch-table route='users'}}
-    <br>
-<table class="table">
-  <thead>
-    <tr>
-      <th><abbr title="Position">#</abbr></th>
-      <th>Name</th>
-      <th>Email</th>
-      <th></th>
-      <th>Role</th>
-      <th></th>
-      <th></th>
-      <th>#</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-  </thead>
-  <tbody>
-    {{#each users}}
-    <tr>
-      <th>{{this.id}}</th>
-      <td>{{this.name}}</td>
-      <td>{{this.email}}</td>
-      <td></td>
-      <td>{{#if this.isAdmin}}admin{{else}}user{{/if}}</td>
-      <td></td>
-      <td></td>
-      <td>{{#if this.isAdmin}}
-      <form action="/admin/users/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
-        <button type="submit" class="btn btn-link btn-admin" onclick="return confirm(`確定要調整{{ this.name }}的權限嗎？`)">set as user
-        </button>
-      </form>
-      {{else}}
-      <form action="/admin/users/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
-        <button type="submit" class="btn btn-link btn-user" onclick="return confirm(`確定要調整{{ this.name }}的權限嗎？`)">set as admin
-        </button>
-      </form>
-      {{/if}}</td>
-      <td></td>
-      <td></td>
-      </td>
 
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
-</div>
+    <div class="columns is-multiline is-mobile mt-4">
+      {{#each users}}
+      <div class="column is-12-mobile is-6-tablet is-4-desktop">
+        <div class="card">
+          <div class="card-content">
+            <p class="title is-5">#{{this.id}} {{this.name}}</p>
+            <p class="subtitle is-6">{{this.email}}</p>
+            <p class="mb-3">{{#if this.isAdmin}}Admin{{else}}User{{/if}}</p>
+            <div class="buttons are-small">
+              {{#if this.isAdmin}}
+              <form action="/admin/users/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
+                <button type="submit" class="button is-warning" onclick="return confirm(`確定要將 {{ this.name }} 設為普通用戶嗎？`)">Set as User</button>
+              </form>
+              {{else}}
+              <form action="/admin/users/{{this.id}}?_method=PATCH" method="POST" style="display: inline;">
+                <button type="submit" class="button is-success" onclick="return confirm(`確定要將 {{ this.name }} 設為管理員嗎？`)">Set as Admin</button>
+              </form>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
 </section>
