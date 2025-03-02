@@ -29,16 +29,16 @@
         <div class="buttons">
           {{#if user}}
           {{#if user.isAdmin}}
-            <a href="/admin" class="button is-primary is-small">Admin 後台</a>
-           {{/if}}
-            <a href="#" class="button is-primary is-small" onclick="event.preventDefault()">
-               Hi, {{#if user.lineDisplayName}}{{user.lineDisplayName}}{{else}}{{user.name}}{{/if}}
-           </a>
-            <a href="/users/{{user.id}}" class="button is-outlined is-small">My Profile</a>
-            <a href="/logout" class="button is-light is-small">Log out</a>
+            <a href="/admin" class="button is-primary is-small custom-font-size">Admin 後台</a>
+          {{/if}}
+          <a href="#" class="button is-primary is-small custom-font-size" onclick="event.preventDefault()">
+            Hi, {{#if user.lineDisplayName}}{{user.lineDisplayName}}{{else}}{{user.name}}{{/if}}
+          </a>
+          <a href="/users/{{user.id}}" class="button is-outlined is-small custom-font-size">My Profile</a>
+          <a href="/logout" class="button is-light is-small custom-font-size">Log out</a>
           {{else}}
-            <a href="/signup" class="button is-primary">Sign up</a>
-            <a href="/login" class="button is-light">Log in</a>
+          <a href="/signup" class="button is-primary custom-font-size">Sign up</a>
+          <a href="/login" class="button is-light custom-font-size">Log in</a>
           {{/if}}
         </div>
       </div>
@@ -63,34 +63,34 @@
     const $navbarLinks = Array.prototype.slice.call(document.querySelectorAll('.navbar-link'), 0);
     $navbarLinks.forEach(el => {
       el.addEventListener('click', (e) => {
-        if (window.innerWidth <= 1023) { // Bulma 的手機斷點
+        if (window.innerWidth <= 1023) { 
           e.preventDefault(); // 防止點擊時跳轉
-          const dropdown = el.nextElementSibling; // 獲取旁邊的 navbar-dropdown
-          const isActive = dropdown.classList.contains('is-active');
+          const dropdown = el.nextElementSibling
+          const isActive = dropdown.classList.contains('is-active')
           
           // 如果當前下拉選單未展開，則展開；若已展開，則收合
           if (!isActive) {
-            dropdown.classList.add('is-active');
+            dropdown.classList.add('is-active')
           } else {
-            dropdown.classList.remove('is-active');
+            dropdown.classList.remove('is-active')
           }
         }
       });
     });
 
     // 點擊下拉選單中的項目時收合 navbar-menu
-    const $dropdownItems = Array.prototype.slice.call(document.querySelectorAll('.navbar-dropdown .navbar-item'), 0);
+    const $dropdownItems = Array.prototype.slice.call(document.querySelectorAll('.navbar-dropdown .navbar-item'), 0)
     $dropdownItems.forEach(item => {
       item.addEventListener('click', () => {
         if (window.innerWidth <= 1023) {
-          const menu = document.getElementById('navbarBasicExample');
-          const burger = document.querySelector('.navbar-burger');
-          menu.classList.remove('is-active');
-          burger.classList.remove('is-active');
+          const menu = document.getElementById('navbarBasicExample')
+          const burger = document.querySelector('.navbar-burger')
+          menu.classList.remove('is-active')
+          burger.classList.remove('is-active')
         }
-      });
-    });
-  });
+      })
+    })
+  })
 </script>
 
 <style>
@@ -101,5 +101,9 @@
     .navbar-dropdown.is-active {
       display: block; /* 點擊時顯示 */
     }
+  }
+  /* 添加自定義類名來調整字體大小 */
+  .custom-font-size {
+    font-size: 1rem; /* 與 navbar-item 的預設字體大小一致 */
   }
 </style>
