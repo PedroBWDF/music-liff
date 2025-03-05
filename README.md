@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-# Music-forum Project
+# Music-LIFF Project
 
-**A Spotify-integrated & server-side rendered web application**
+**A LINE-LIFF & Spotify-integrated web application**
 
 ---
 ## Table of contents
@@ -17,7 +16,7 @@
 <img width="570" alt="螢幕擷取畫面 2024-07-19 153326" src="https://github.com/user-attachments/assets/e0b552b8-b000-45d7-9d75-dc3ec1f2a810">
 
 ## System Architecture
-![Unnamed File (2)](https://github.com/user-attachments/assets/250f306b-1647-4a46-acb6-5f529ae6cfed)
+
 
 
 ## Features
@@ -39,41 +38,20 @@
   - Set general user as admin
 
 ### Advanced Authentication
-- Local authentication
+- LINE login authentication
 - Google OAuth integration for sign-up/login
 
 ## Technology Stack
-- **Frontend**: Server-Side Rendering (SSR)
+- **Frontend**: Server-Side Rendering (SSR) & HTML JS
 - **Backend**: Node.js (Express.js framework)
 - **Database**: MySQL
-- **Authentication**: Local strategy & Google OAuth
-- **API Integration**: Spotify API
-- **Containerization**: Docker for easy deployment
+- **Authentication**: Local strategy & Google OAuth & LINE Login
+- **API Integration**: Spotify API & LINE LIFF API
 
 ## Deployment :
-#### With Docker
-1. 
+#### Visit the URL below:
 ```
-docker pull bwdf64587p/music-forum:app_latest
-docker pull bwdf64587p/music-forum:db
-```
-2.
-```
-docker-compose up --build
-```
-
-3. Access the app at 
-```
-http://localhost:3000
-```
-
-#### Locally
-- git clone
-- npm install
-- npm start/npm run dev
-- Access the app at 
-```
-http://localhost:3000
+https://music-liff.onrender.com/music
 ```
 
 #### Test Account
@@ -97,7 +75,3 @@ accounts for easy testing:
 
 #### Authorization & Error Messages
 ![Demo_4](https://github.com/user-attachments/assets/dbd6f83e-f042-4bba-ab05-9d9c5a7df458)
-
-=======
-# music-liff
->>>>>>> e6a4808917aad846555fea32a1f00c3894e2b5a7
