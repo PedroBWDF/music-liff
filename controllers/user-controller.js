@@ -64,7 +64,34 @@ const userController = {
   logout: (req, res) => {
     req.flash('success_messages', '成功登出了！')
     res.clearCookie('jwt') // express文件有寫
-    res.redirect('/music')
+    // 登出line
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Logging out...</title>
+        <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+      </head>
+      <body>
+        <script>
+          liff.init({ liffId: '2006961935-RxM0xqae' })
+            .then(() => {
+              if (liff.isLoggedIn()) {
+                // 清除 LINE 登入狀態
+                liff.logout()
+              }
+              // 重導向到首頁
+              window.location.href = '/music'
+            })
+            .catch(err => {
+              console.error('LIFF init failed:', err)
+              window.location.href = '/music'
+            })
+        </script>
+      </body>
+      </html>
+    `)
+    // res.redirect('/music')
   },
 
   getUser: (req, res, next) => {
